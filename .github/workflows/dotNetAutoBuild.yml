@@ -54,6 +54,8 @@ jobs:
 
     - name: 运行HttpCompressionFileExtractor与JetbrainsPluginVersionModifier
       run: |
+        mkdir -p $HOME/outputs
+        chmod -R 755 $HOME/outputs
         cd $HOME/HttpCompressionFileExtractor
         ./HttpCompressionFileExtractor.Cli list --url=${{ env.DOWN_URI }} --search=localization-\\w+\\.jar --isRegex=true --isWebApi=true > $HOME/HttpCompressionFileExtractor.json
         cat $HOME/HttpCompressionFileExtractor.json
