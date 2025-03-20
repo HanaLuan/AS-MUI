@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<LangVersion>7</LangVersion>
+		<NoWarn>IDE0130</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock.csproj" />
+	</ItemGroup>
+
+</Project>

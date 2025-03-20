@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>7</LangVersion>
+	  <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eruru.CSharp.Api\Eruru.CSharp.Api\Eruru.CSharp.Api.csproj" />
+  </ItemGroup>
+
+</Project>

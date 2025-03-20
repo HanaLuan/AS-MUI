@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor", "HttpCompressionFileExtractor\HttpCompressionFileExtractor.csproj", "{769C7582-3AC2-C02C-547E-6B03852797E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor.Android", "HttpCompressionFileExtractor.Android\HttpCompressionFileExtractor.Android.csproj", "{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor.Browser", "HttpCompressionFileExtractor.Browser\HttpCompressionFileExtractor.Browser.csproj", "{72B2952A-61EE-41D7-C045-64B8F245B858}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor.Desktop", "HttpCompressionFileExtractor.Desktop\HttpCompressionFileExtractor.Desktop.csproj", "{4D577434-57AB-9930-7B05-6949BAD51957}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.CSharp.Api", "..\Eruru.CSharp.Api\Eruru.CSharp.Api\Eruru.CSharp.Api.csproj", "{DBE4B17C-1946-A8FB-3E0F-056904D01E75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor.Cli", "HttpCompressionFileExtractor.Cli\HttpCompressionFileExtractor.Cli.csproj", "{DE395E79-5ABC-4D70-ABB6-F5CC4BD5DE61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCompressionFileExtractor.Core", "HttpCompressionFileExtractor.Core\HttpCompressionFileExtractor.Core.csproj", "{4530044C-130B-4134-B5E8-7FBFB83942F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{769C7582-3AC2-C02C-547E-6B03852797E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{769C7582-3AC2-C02C-547E-6B03852797E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{769C7582-3AC2-C02C-547E-6B03852797E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{769C7582-3AC2-C02C-547E-6B03852797E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B588DA18-1FA3-40C1-9E76-C9EF55DBF4FC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{72B2952A-61EE-41D7-C045-64B8F245B858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B2952A-61EE-41D7-C045-64B8F245B858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B2952A-61EE-41D7-C045-64B8F245B858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B2952A-61EE-41D7-C045-64B8F245B858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D577434-57AB-9930-7B05-6949BAD51957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D577434-57AB-9930-7B05-6949BAD51957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D577434-57AB-9930-7B05-6949BAD51957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D577434-57AB-9930-7B05-6949BAD51957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBE4B17C-1946-A8FB-3E0F-056904D01E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE4B17C-1946-A8FB-3E0F-056904D01E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE4B17C-1946-A8FB-3E0F-056904D01E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE4B17C-1946-A8FB-3E0F-056904D01E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE395E79-5ABC-4D70-ABB6-F5CC4BD5DE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE395E79-5ABC-4D70-ABB6-F5CC4BD5DE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE395E79-5ABC-4D70-ABB6-F5CC4BD5DE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE395E79-5ABC-4D70-ABB6-F5CC4BD5DE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4530044C-130B-4134-B5E8-7FBFB83942F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4530044C-130B-4134-B5E8-7FBFB83942F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4530044C-130B-4134-B5E8-7FBFB83942F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4530044C-130B-4134-B5E8-7FBFB83942F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5B4D820-A01A-4526-BD2F-5CA263E43EA0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,74 @@
+﻿<UserControl
+	x:Class="HttpCompressionFileExtractor.HomeControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="using:HttpCompressionFileExtractor"
+	xmlns:i="using:Avalonia.Xaml.Interactivity"
+	xmlns:ui="using:FluentAvalonia.UI.Controls"
+	d:DesignHeight="650"
+	d:DesignWidth="1000"
+	x:CompileBindings="False"
+	x:DataType="vm:HomeControlViewModel"
+	mc:Ignorable="d">
+	<Design.DataContext>
+		<vm:HomeControlViewModel />
+	</Design.DataContext>
+	<ui:TabView AddTabButtonCommand="{Binding AddFileCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				TabCloseRequested="TabView_TabCloseRequested" SelectedItem="{Binding File}"
+            TabItems="{Binding Files}" Name="FileTabView">
+		<ui:TabView.TabItemTemplate>
+			<DataTemplate DataType="vm:HttpCompressionFileViewModel">
+				<ui:TabViewItem Header="{Binding Stream.Url}">
+					<ui:TabViewItem.ContentTemplate>
+						<DataTemplate>
+							<Grid RowDefinitions="Auto,*,Auto" Margin="5" DataContext="{Binding SelectedItem, ElementName=FileTabView}"
+									x:DataType="vm:HttpCompressionFileViewModel">
+								<Grid ColumnDefinitions="*,Auto">
+									<TextBox Text="{Binding SearchText}"/>
+									<StackPanel Grid.Column="1" Spacing="5" Orientation="Horizontal" Margin="5,0,0,0">
+										<ToggleButton Content="正则" IsChecked="{Binding IsUseRegex}"/>
+										<Button Content="搜索" Command="{Binding OnSearchCommand}"/>
+									</StackPanel>
+								</Grid>
+								<DataGrid ItemsSource="{Binding SearchedFiles}" IsReadOnly="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
+										  Grid.Row="1" Margin="0,5,0,0"
+										  CanUserSortColumns="True">
+									<DataGrid.Columns>
+										<DataGridTemplateColumn>
+											<DataGridTemplateColumn.CellTemplate>
+												<DataTemplate>
+													<CheckBox IsChecked="{Binding IsSelected}" />
+												</DataTemplate>
+											</DataGridTemplateColumn.CellTemplate>
+										</DataGridTemplateColumn>
+										<DataGridTextColumn Header="路径" Binding="{Binding FullName}" IsReadOnly="True"/>
+										<DataGridTextColumn Header="大小"
+											Binding="{Binding Length, Converter={StaticResource FileSizeTextConverter}}" 
+											IsReadOnly="True"
+										/>
+										<DataGridTextColumn Header="压缩后大小"
+											Binding="{Binding CompressedLength, Converter={StaticResource FileSizeTextConverter}}"
+											IsReadOnly="True"
+										/>
+										<DataGridTextColumn Header="修改时间"
+											Binding="{Binding LastWriteTime, Converter={StaticResource DateTimeLocalTextConverter}}"
+											IsReadOnly="True"
+										/>
+										<DataGridTextColumn Header="注释" IsReadOnly="True" Binding="{Binding Comment}"/>
+										<DataGridCheckBoxColumn Header="加密" IsReadOnly="True"/>
+									</DataGrid.Columns>
+								</DataGrid>
+								<Grid ColumnDefinitions="*,Auto" Grid.Row="2" Margin="0,5,0,0">
+									<TextBlock Text="{Binding State}" VerticalAlignment="Center"/>
+									<Button Content="提取" Grid.Column="1" HorizontalAlignment="Right" Command="{Binding OnExtractCommand}"/>
+								</Grid>
+							</Grid>
+						</DataTemplate>
+					</ui:TabViewItem.ContentTemplate>
+				</ui:TabViewItem>
+			</DataTemplate>
+		</ui:TabView.TabItemTemplate>
+	</ui:TabView>
+</UserControl>
