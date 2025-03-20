@@ -3,7 +3,7 @@ name: Android Studio MUI from JetBrains (Auto)
 
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "development", "master" ]
   pull_request:
     branches: [ "development" ]
   workflow_dispatch:
@@ -12,6 +12,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
