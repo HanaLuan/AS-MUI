@@ -56,6 +56,7 @@ jobs:
       run: |
         cd $HOME/HttpCompressionFileExtractor
         ./HttpCompressionFileExtractor.Cli list --url=${{ env.DOWN_URI }} --search=localization-\\w+\\.jar --isRegex=true --isWebApi=true > $HOME/HttpCompressionFileExtractor.json
+        cat $HOME/HttpCompressionFileExtractor.json
         cat $HOME/HttpCompressionFileExtractor.json | jq -c '.data[]' | while read item; do
           fullName=$(echo "$item" | jq -r '.fullName')
           ./HttpCompressionFileExtractor.Cli download --url=${{ env.DOWN_URI }} --path=$fullName --output=$HOME/outputs/$fullName --isWebApi=true
