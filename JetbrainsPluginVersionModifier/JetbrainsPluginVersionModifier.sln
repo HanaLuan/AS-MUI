@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetbrainsPluginVersionModifier", "JetbrainsPluginVersionModifier\JetbrainsPluginVersionModifier.csproj", "{22A3C216-E101-43E5-B0AA-54198CA00293}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.CSharp.Api", "..\Eruru.CSharp.Api\Eruru.CSharp.Api\Eruru.CSharp.Api.csproj", "{41FF2E3C-5364-9D29-296B-CCAF488B0762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.CSharp.ReaderWriterLock", "..\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock.csproj", "{700230EE-5EE5-FC34-C3A5-F428868421CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{22A3C216-E101-43E5-B0AA-54198CA00293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22A3C216-E101-43E5-B0AA-54198CA00293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A3C216-E101-43E5-B0AA-54198CA00293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FF2E3C-5364-9D29-296B-CCAF488B0762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FF2E3C-5364-9D29-296B-CCAF488B0762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FF2E3C-5364-9D29-296B-CCAF488B0762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FF2E3C-5364-9D29-296B-CCAF488B0762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

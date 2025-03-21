@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.CSharp.Api", "Eruru.CSharp.Api\Eruru.CSharp.Api.csproj", "{AC17B99C-D709-490D-B21E-8A16E0CC822B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.CSharp.ReaderWriterLock", "..\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock\Eruru.CSharp.ReaderWriterLock.csproj", "{700230EE-5EE5-FC34-C3A5-F428868421CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC17B99C-D709-490D-B21E-8A16E0CC822B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC17B99C-D709-490D-B21E-8A16E0CC822B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC17B99C-D709-490D-B21E-8A16E0CC822B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700230EE-5EE5-FC34-C3A5-F428868421CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace Eruru.CSharp.Api {
 		public Formatting Formatting { get => JsonTextWriter.Formatting; set => JsonTextWriter.Formatting = value; }
 
 		readonly JsonTextWriter JsonTextWriter;
-		bool WritedHeader = true;
+		bool WritedHeader;
 		bool WritedResult;
 
 		public CommandLineWriter (bool isWebApi = false, TextWriter textWriter = null) {
@@ -72,11 +72,11 @@ namespace Eruru.CSharp.Api {
 			if (!IsWebApi) {
 				throw exception;
 			}
-			SetResult (-1, exception.Message, exception);
+			SetResult (-1, exception.Message, EruruApi.ToString (exception));
 		}
 
 		void Header () {
-			if (!WritedHeader) {
+			if (WritedHeader) {
 				return;
 			}
 			WritedHeader = true;

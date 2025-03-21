@@ -16,11 +16,26 @@ namespace JetbrainsPluginVersionModifier {
 
 		static async Task Main (string[] args) {
 			var pathOrDirectoryOption = new Option<string> ("--path", "路径或目录批量修改");
-			var isWebApiOption = new Option<bool> ("--isWebApi", () => false, "WebApi方式打印结果");
 			var sinceVersion = new Option<string> ("--sinceVersion", () => string.Empty);
-			var rootCommand = new RootCommand ("修改Jetbrains插件版本号") { pathOrDirectoryOption, sinceVersion, isWebApiOption };
-			rootCommand.SetHandler (async (path, sinceVersion, isWebApi) => {
+			var isWebApiOption = new Option<bool> ("--isWebApi", () => false, "WebApi方式打印结果");
+			var isIndentOption = new Option<bool> ("--isIndent", () => false, "缩进");
+			var rootCommand = new RootCommand ("修改Jetbrains插件版本号") {
+				pathOrDirectoryOption, sinceVersion, isWebApiOption, isIndentOption
+			};
+			rootCommand.SetHandler (ModifyAsync, pathOrDirectoryOption, sinceVersion, isWebApiOption, isIndentOption);
+			try {
+				await rootCommand.InvokeAsync (args);
+			} finally {
+				CommandLineWriter.Dispose ();
+			}
+		}
+
+		static async Task ModifyAsync (string path, string sinceVersion, bool isWebApi, bool isIndent) {
+			try {
 				CommandLineWriter.IsWebApi = isWebApi;
+				if (isIndent) {
+					CommandLineWriter.Formatting = Newtonsoft.Json.Formatting.Indented;
+				}
 				string[] paths;
 				if (Directory.Exists (path)) {
 					paths = Directory.GetFiles (path, "*.jar", SearchOption.AllDirectories);
@@ -76,20 +91,15 @@ namespace JetbrainsPluginVersionModifier {
 					var hash = Convert.ToHexString (sha256.ComputeHash (stream)).ToLowerInvariant ();
 					CommandLineWriter.WriteLine ($"Since版本：{oldSinceVersion} 修改后：{newSinceVersion} Sha256：{hash} 已修改原文件：{fileInfo}");
 					jsonArray.Add (new JObject () {
-						{ "sinceVersion", oldSinceVersion },
-						{ "newSinceVersion", newSinceVersion },
-						{ "sha256", hash },
-						{ "path", fileInfo.FullName }
-					});
+							{ "sinceVersion", oldSinceVersion },
+							{ "newSinceVersion", newSinceVersion },
+							{ "sha256", hash },
+							{ "path", fileInfo.FullName }
+						});
 				}
 				CommandLineWriter.SetData (() => jsonArray);
-			}, pathOrDirectoryOption, sinceVersion, isWebApiOption);
-			try {
-				await rootCommand.InvokeAsync (args);
 			} catch (Exception exception) {
 				CommandLineWriter.SetException (exception);
-			} finally {
-				CommandLineWriter.Dispose ();
 			}
 		}
 

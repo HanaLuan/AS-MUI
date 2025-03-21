@@ -1,0 +1,90 @@
+name: .NET
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: 初始化
+      run: |
+        echo "releaseName=${{github.event.repository.name}}_Actions_$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        echo "tagName=${{github.event.repository.name}}_Actions_$(date +'%Y-%m-%d')_$(date +'%s')" >> $GITHUB_ENV
+        echo "fileUrl=https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.win.zip" >> $GITHUB_ENV
+
+    - name: 安装.NET
+      uses: actions/setup-dotnet@v4
+
+    - name: 构建HttpCompressionFileExtractor
+      run: |
+        cd ./HttpCompressionFileExtractor/HttpCompressionFileExtractor.Cli
+        dotnet publish --configuration=Release --framework=net8.0 --runtime=linux-x64 --output=$HOME/Programs/HttpCompressionFileExtractor /p:PublishSingleFile=true
+        echo 构建结果
+        ls $HOME/Programs/HttpCompressionFileExtractor
+
+    - name: 构建JetbrainsPluginVersionModifier
+      run: |
+        cd ./JetbrainsPluginVersionModifier/JetbrainsPluginVersionModifier
+        dotnet publish --configuration=Release --framework=net8.0 --runtime=linux-x64 --output=$HOME/Programs/JetbrainsPluginVersionModifier /p:PublishSingleFile=true
+        echo 构建结果
+        ls $HOME/Programs/JetbrainsPluginVersionModifier
+
+    - name: 运行HttpCompressionFileExtractor
+      run: |
+        cd $HOME/Programs/HttpCompressionFileExtractor
+        ./HttpCompressionFileExtractor.Cli list --url=$fileUrl --search=localization-\\w+\\.jar --isRegex --isWebApi --isIndent > $HOME/HttpCompressionFileExtractor.json
+        cat $HOME/HttpCompressionFileExtractor.json
+        cat $HOME/HttpCompressionFileExtractor.json | jq -c '.data[]' | while read item; do
+            fullName=$(echo "$item" | jq -r '.fullName')
+            echo
+            echo 开始下载 $fullName
+            ./HttpCompressionFileExtractor.Cli download --url=$fileUrl --path=$fullName --output=$HOME/Outputs/$fullName --isWebApi --isIndent
+        done
+    
+    - name: 运行JetbrainsPluginVersionModifier
+      run: |
+        $HOME/Programs/JetbrainsPluginVersionModifier/JetbrainsPluginVersionModifier --path=$HOME/Outputs --isWebApi --isIndent > $HOME/JetbrainsPluginVersionModifier.json
+        cat $HOME/JetbrainsPluginVersionModifier.json
+        echo
+        cat $HOME/JetbrainsPluginVersionModifier.json | jq -c '.data[]' | while read item; do
+            sinceVersion=$(echo "$item" | jq -r '.sinceVersion')
+            path=$(echo "$item" | jq -r '.path')
+            dirname=$(dirname "$path")
+            basename=$(basename "$path" .jar)
+            newPath="$dirname/${basename}_${sinceVersion}.jar"
+            mv "$path" "$newPath"
+            echo "$newPath" >> $HOME/Files.txt
+            echo 已重命名 $newPath
+        done
+        
+    - name: 创建发布标记
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        tag_name: ${{env.tagName}}
+        release_name: ${{env.releaseName}}
+        draft: false
+        prerelease: false
+
+    - name: 上传最终产物
+      id: find_and_upload_files
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: |
+        while IFS= read -r file; do
+          basename=$(basename "$file" .jar)
+          GITHUB_UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}
+          GITHUB_UPLOAD_URL="${GITHUB_UPLOAD_URL%\{*}"
+          GITHUB_UPLOAD_URL="${GITHUB_UPLOAD_URL%\?*}"
+          curl \
+            -X POST \
+            -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary @"${file}" \
+            "${GITHUB_UPLOAD_URL}?name=${basename}.jar&label=${tagName}_${basename}.jar"
+        done < $HOME/Files.txt
