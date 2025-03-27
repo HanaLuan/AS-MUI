@@ -29,9 +29,9 @@ jobs:
         echo "releaseName=${{github.event.repository.name}}_Actions_${fileName}" >> $GITHUB_ENV
         echo "tagName=${{github.event.repository.name}}_Actions_${fileName}" >> $GITHUB_ENV
         echo "fileUrl=$fileUrl" >> $GITHUB_ENV
-        latestTagName=$(curl -s https://api.github.com/repos/${{github.repository}}/releases/latest | jq -r '.tag_name')
-        if [[ $latestTagName == ${{env.releaseName}} ]]; then
-          echo "releaseName=1" >> $GITHUB_ENV
+        latestTagName=$(curl -s -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
+          https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+        if [[ "$latestTagName" == "${{env.releaseName}}" ]]; then
           echo "$latestTagName 已上传，无需执行"
           echo "isUploadedFile=true" >> $GITHUB_ENV
         else
