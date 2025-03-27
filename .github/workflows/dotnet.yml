@@ -39,11 +39,11 @@ jobs:
         fi
 
     - name: 安装.NET
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       uses: actions/setup-dotnet@v4
 
     - name: 构建HttpCompressionFileExtractor
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       run: |
         cd ./HttpCompressionFileExtractor/HttpCompressionFileExtractor.Cli
         dotnet publish --configuration=Release --framework=net8.0 --runtime=linux-x64 --output=$HOME/Programs/HttpCompressionFileExtractor /p:PublishSingleFile=true
@@ -51,7 +51,7 @@ jobs:
         ls $HOME/Programs/HttpCompressionFileExtractor
 
     - name: 构建JetbrainsPluginVersionModifier
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       run: |
         cd ./JetbrainsPluginVersionModifier/JetbrainsPluginVersionModifier
         dotnet publish --configuration=Release --framework=net8.0 --runtime=linux-x64 --output=$HOME/Programs/JetbrainsPluginVersionModifier /p:PublishSingleFile=true
@@ -59,7 +59,7 @@ jobs:
         ls $HOME/Programs/JetbrainsPluginVersionModifier
 
     - name: 运行HttpCompressionFileExtractor
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       run: |
         cd $HOME/Programs/HttpCompressionFileExtractor
         ./HttpCompressionFileExtractor.Cli list --url=$fileUrl --search=localization-\\w+\\.jar --isRegex --isWebApi --isIndent > $HOME/HttpCompressionFileExtractor.json
@@ -72,7 +72,7 @@ jobs:
         done
     
     - name: 运行JetbrainsPluginVersionModifier
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       run: |
         $HOME/Programs/JetbrainsPluginVersionModifier/JetbrainsPluginVersionModifier --path=$HOME/Outputs --isWebApi --isIndent > $HOME/JetbrainsPluginVersionModifier.json
         cat $HOME/JetbrainsPluginVersionModifier.json
@@ -84,7 +84,7 @@ jobs:
         done
         
     - name: 创建发布标记
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -96,7 +96,7 @@ jobs:
         prerelease: false
 
     - name: 上传最终产物
-      if: ${{env.isUploadedFile == "false"}}
+      if: ${{env.isUploadedFile == 'false'}}
       id: find_and_upload_files
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
