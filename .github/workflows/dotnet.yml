@@ -19,9 +19,16 @@ jobs:
 
     - name: 初始化
       run: |
-        echo "releaseName=${{github.event.repository.name}}_Actions_$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-        echo "tagName=${{github.event.repository.name}}_Actions_$(date +'%Y-%m-%d')_$(date +'%s')" >> $GITHUB_ENV
-        echo "fileUrl=https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.win.zip" >> $GITHUB_ENV
+        curl -s -X GET "https://data.services.jetbrains.com/products?code=IIU&release.type=release" > $HOME/list.json
+        fileUrl=$(cat "$HOME/list.json" | jq -r ".[0].releases[0].downloads.windowsZip.link")
+        fileBuild=$(cat "$HOME/list.json" | jq -r ".[0].releases[0].build")
+        fileVersion=$(cat "$HOME/list.json" | jq -r ".[0].releases[0].version")
+        fileCode=$(cat "$HOME/list.json" | jq -r ".[0].code")
+        fileName=${fileCode}_${fileVersion}_${fileBuild}
+        echo 文件名 $fileName 文件URL $fileUrl
+        echo "releaseName=${{github.event.repository.name}}_Actions_${fileName}" >> $GITHUB_ENV
+        echo "tagName=${{github.event.repository.name}}_Actions_${fileName}" >> $GITHUB_ENV
+        echo "fileUrl=$fileUrl" >> $GITHUB_ENV
 
     - name: 安装.NET
       uses: actions/setup-dotnet@v4
@@ -57,15 +64,10 @@ jobs:
         $HOME/Programs/JetbrainsPluginVersionModifier/JetbrainsPluginVersionModifier --path=$HOME/Outputs --isWebApi --isIndent > $HOME/JetbrainsPluginVersionModifier.json
         cat $HOME/JetbrainsPluginVersionModifier.json
         echo
-        cat $HOME/JetbrainsPluginVersionModifier.json | jq -c '.data[]' | while read item; do
-            sinceVersion=$(echo "$item" | jq -r '.sinceVersion')
-            path=$(echo "$item" | jq -r '.path')
-            dirname=$(dirname "$path")
-            basename=$(basename "$path" .jar)
-            newPath="$dirname/${basename}_${sinceVersion}.jar"
-            mv "$path" "$newPath"
-            echo "$newPath" >> $HOME/Files.txt
-            echo 已重命名 $newPath
+        cat $HOME/JetbrainsPluginVersionModifier.json | jq -c ".data[]" | while read item; do
+            path=$(echo "$item" | jq -r ".path")
+            echo "$path" >> $HOME/Files.txt
+            echo 准备上传 $path
         done
         
     - name: 创建发布标记
