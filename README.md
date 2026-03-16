@@ -13,7 +13,11 @@ Android Studio UI 言語プラグインのインストール方法。
 | メニューバー **Help**（`Alt+H`）→ **About** をクリック | 打开菜单栏 **Help**（`Alt+H`）→ 点击 **About** | 메뉴바 **Help** (`Alt+H`) → **About** 클릭 |
 | ----------------------------------------- | ------------------------------------- | ------------------------------------- |
 
+![Navi_About_Help-1](images/FE9A19B1AA160007A06D7DA4BA428528.png)
+
 例 / 示例 / 예시:
+
+![Navi_About_Help-2](images/B66EB1E8A5A28AA2F19797C8106DF18A.png)
 
 ```text
 Android Studio Panda 3 | 2025.3.3 Canary 4
@@ -23,7 +27,6 @@ VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
 ```
 
 確認する Build 番号 / 需要关注的 Build / 확인해야 할 Build:
-
 ```text
 253.31033.145.2533.15016459
 ```
@@ -41,6 +44,8 @@ VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
 | ------------------------------------ | ----------------------- | -------------------- |
 
 例 / 示例 / 예:
+
+![Navi_Repo_Release](images/22F49DB1FA7B2C1CCDAF87A3A33D0312.png)
 
 Build:
 
@@ -82,9 +87,13 @@ localization-ko.jar
 | Android Studio を起動 | 打开 Android Studio | Android Studio 실행 |
 | ------------------ | ----------------- | ----------------- |
 
+![Navi_File_Settings](images/FA10ED8390CC873D9F97B0132FE9D27F.png)
+
 ```
 File → Settings
 ```
+
+![Navi_File_Settings_Plugins](images/286F02329F2EAEAF9EA8B76498659F85.png)
 
 ```
 Plugins
@@ -109,6 +118,8 @@ Plugins
 
 再起動後:
 
+![Navi_File_Settings_Appearance-and-Behavior_Language-and-Region](images/C4E9FCB55F9778BA4347CC4486085C40.png)
+
 ```
 Settings
  → Appearance & Behavior
@@ -118,8 +129,15 @@ Settings
 | Language で言語を選択 | 在 Language 中选择语言 | Language에서 언어 선택 |
 | --------------- | ---------------- | ---------------- |
 
+![Navi_File_Settings_Appearance-and-Behavior_Language-and-Region_RestartRequired](images/6793609C7DA26FCD5F8A2E1924308D62.png)
+
 | 指示に従って再起動 | 按提示重启 | 안내에 따라 재시작 |
 | --------- | ----- | ---------- |
+
+![Localization_JA](images/BAE7783E784DA752468E5F1635A07749.png)
+![Localization_KO](images/E9CE5346D36D0F4D84E57ED8BDC88DE0.png)
+![Localization_ZH](images/5BF40087614C8B5BBF23AEF1E0C8C324.png)
+
 
 ---
 
