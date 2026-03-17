@@ -197,3 +197,31 @@ File 'localization-ja.jar' contains invalid plugin descriptor
 * Pull Request を歓迎します
 
 </details>
+<!-- <br /> -->
+<details>
+<summary><b>Note: 言語パック使用時に <code>cause index == 7</code> エラーが発生する場合</b></summary>
+
+| 言語パックを使用した場合のみ `cause index == 7` エラーが発生し、英語 UI では正常に起動することがあります。 | 仅在使用语言包时出现 `cause index == 7` 错误，但使用英语界面时正常。 | 언어팩을 사용할 때만 `cause index == 7` 오류가 발생하고 영어 UI에서는 정상 동작하는 경우가 있습니다. |
+|------|------|------|
+
+方法 1
+| Android Studio の起動オプションに以下を追加します。 | 在 Android Studio 启动参数中添加以下内容。 | Android Studio 실행 옵션에 다음을 추가합니다. |
+|------|------|------|
+
+```text
+-Dswing.disableMnemonicParsing=true
+```
+
+方法 2
+| Android Studio の VM オプションファイルを編集します。 | 编辑 Android Studio 的 VM 选项文件。 | Android Studio VM 옵션 파일을 수정합니다. |
+|------|------|------|
+
+`<AndroidStudioインストールディレクトリ>/bin/studio64.vmoptions` 以下を追加:
+```text
+-Dswing.disableMnemonicParsing=true
+```
+
+| 変更後、Android Studio を再起動してください。 | 修改后重新启动 Android Studio。 | 수정 후 Android Studio 를 재시작하세요。 |
+|------|------|------|
+
+</details>
